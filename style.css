@@ -14,6 +14,24 @@ header {
   border-bottom: 3px solid #6e56cf;
 }
 
+nav {
+  background: rgba(40, 40, 60, 0.8);
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav a {
+  color: #bb86fc;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 h1 {
   font-size: 3em;
   margin: 0;
@@ -29,19 +47,25 @@ h2 {
 }
 
 main {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
-  background: rgba(40, 40, 60, 0.6);
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Основная колонка + боковая */
+  gap: 30px;
 }
 
 section {
-  margin-bottom: 50px;
-  padding: 20px;
   background: rgba(50, 50, 80, 0.4);
   border-radius: 10px;
+  padding: 20px;
+}
+
+aside {
+  background: rgba(40, 40, 60, 0.6);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 ul {
@@ -80,9 +104,12 @@ footer {
   background: rgba(30, 30, 47, 0.9);
   margin-top: 50px;
   font-size: 0.9em;
+  grid-column: span 2; /* На всю ширину */
 }
 
-/* Иконки (эмодзи в тексте уже есть, но для красоты) */
-h2::before {
-  margin-right: 10px;
+/* Для мобильных */
+@media (max-width: 800px) {
+  main {
+    grid-template-columns: 1fr;
+  }
 }
