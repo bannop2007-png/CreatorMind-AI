@@ -144,12 +144,63 @@
         </div>
       </section>
 
-      <!-- Остальные разделы (советы, заработок, здоровье, FAQ) — добавь из предыдущего кода или скажи, если нужно полный с ними -->
+      <section id="tips">
+        <h2>💡 Полезные советы для старта</h2>
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Советы" style="width:100%; border-radius:15px; margin:20px 0;">
+        <p>1. Создай профиль на 2–3 платформах.<br>
+           2. Заполни портфолио тестовыми работами.<br>
+           3. Откликайся на 10–20 заданий в день.<br>
+           4. Собирай отзывы — они повышают доверие.<br>
+           5. Выводи деньги еженедельно.</p>
+      </section>
 
+      <section id="earnings">
+        <h2>📈 Сколько можно заработать?</h2>
+        <img src="https://i0.wp.com/accountabilitynow.net/wp-content/uploads/2025/12/how-to-make-money-in-2026-the-experts-guide-1.jpg?fit=580%2C387&ssl=1" alt="Заработок" style="width:100%; border-radius:15px; margin:20px 0;">
+        <p>Новичок: 15–30 тыс. ₽ в первый месяц<br>
+           Через 3 месяца: 50–100 тыс. ₽<br>
+           Профи: 200 тыс. ₽ +</p>
+      </section>
+
+      <section id="health">
+        <h2>🩺 Рекомендуем для здоровья</h2>
+        <img src="https://images.unsplash.com/photo-1559757149-7b3c9b3c3e9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Здоровье" style="width:100%; border-radius:15px; margin:20px 0;">
+        <p>Долгая работа за ПК вызывает боли в суставах. Читатели рекомендуют:</p>
+        <div class="card">
+          <h3>Osteofast</h3>
+          <p>Натуральный крем от болей в суставах (акция!)</p>
+          <a href="#" target="_blank">Заказать со скидкой →</a>
+        </div>
+        <p><small>После одобрения в KMA заменю на партнёрскую ссылку</small></p>
+      </section>
+
+      <section id="faq">
+        <h2>❓ ЧаВо</h2>
+        <img src="https://images.unsplash.com/photo-1517245389779-7d29a68ef5b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="FAQ" style="width:100%; border-radius:15px; margin:20px 0;">
+        <p><strong>Нужны вложения?</strong> Нет.<br>
+           <strong>Сколько времени?</strong> От 2 часов.<br>
+           <strong>Выплаты?</strong> Еженедельно.<br>
+           <strong>Для новичков?</strong> Да.</p>
+      </section>
     </div>
 
     <aside>
-      <!-- Боковая панель с категориями и рекомендацией Osteofast -->
+      <h2>📌 Категории</h2>
+      <ul>
+        <li><a href="#intro">Введение</a></li>
+        <li><a href="#top-ways">ТОП способы</a></li>
+        <li><a href="#tips">Советы</a></li>
+        <li><a href="#earnings">Заработок</a></li>
+        <li><a href="#health">Здоровье</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <h2>🔥 Горячая рекомендация</h2>
+      <div class="card">
+        <h3>Osteofast</h3>
+        <p>Крем от болей в суставах</p>
+        <a href="#" target="_blank">Узнать подробнее →</a>
+      </div>
     </aside>
   </main>
 
@@ -158,50 +209,39 @@
   </footer>
 
   <script>
-  // Показываем модальное окно, если пользователь ещё не "зарегистрирован"
-  window.onload = function() {
-    if (!localStorage.getItem('registered')) {
-      setTimeout(function() {
-        document.getElementById('registerModal').style.display = 'flex';
-      }, 3000); // 3 секунды задержки перед показом
+    window.onload = function() {
+      if (!localStorage.getItem('registered')) {
+        setTimeout(function() {
+          document.getElementById('registerModal').style.display = 'flex';
+        }, 3000);
+      }
+    };
+
+    var form = document.querySelector('#registerModal form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        localStorage.setItem('registered', 'true');
+
+        document.querySelector('#registerModal .modal-content').innerHTML = `
+          <span class="close" onclick="closeModal()">×</span>
+          <h2>Спасибо за регистрацию! 🔥</h2>
+          <p>Доступ открыт. Новые способы на email.</p>
+        `;
+
+        setTimeout(closeModal, 4000);
+      });
     }
-  };
 
-  // Закрытие по крестику
-  function closeModal() {
-    document.getElementById('registerModal').style.display = 'none';
-  }
-
-  // Обработка отправки формы
-  var form = document.querySelector('#registerModal form');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      // Не блокируем отправку — Formspree получит данные
-      // e.preventDefault(); // закомментировано, чтобы данные ушли
-
-      // Сохраняем флаг, что зарегистрирован
-      localStorage.setItem('registered', 'true');
-
-      // Меняем содержимое модального окна на "Спасибо"
-      document.querySelector('#registerModal .modal-content').innerHTML = `
-        <span class="close" onclick="closeModal()">×</span>
-        <h2>Спасибо за регистрацию! 🔥</h2>
-        <p>Доступ открыт. Данные отправлены — скоро новые способы на email!</p>
-        <p>Окно закроется автоматически...</p>
-      `;
-
-      // Автоматически закрываем через 4 секунды
-      setTimeout(closeModal, 4000);
-    });
-  }
-
-  // Закрытие по клику вне окна
-  window.onclick = function(event) {
-    var modal = document.getElementById('registerModal');
-    if (event.target == modal) {
-      closeModal();
+    function closeModal() {
+      document.getElementById('registerModal').style.display = 'none';
     }
-  }
-</script>
+
+    window.onclick = function(event) {
+      var modal = document.getElementById('registerModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
 </html>
