@@ -57,7 +57,33 @@
 
             resultDiv.innerHTML = "Ideas will appear here...";
         }
+        async function generateIdeas() {
+    const niche = document.getElementById("niche").value;
+    const resultDiv = document.getElementById("result");
+
+    if (!niche) {
+        resultDiv.innerHTML = "Please enter a niche.";
+        return;
+    }
+
+    resultDiv.innerHTML = "Generating ideas...";
+
+    try {
+        const response = await fetch("http://localhost:3000/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ niche })
+        });
+
+        const data = await response.json();
+        resultDiv.innerHTML = data.ideas.replace(/\n/g, "<br>");
+    } catch (error) {
+        resultDiv.innerHTML = "Error generating ideas.";
+        console.error(error);
+    }
+}
     </script>
 
 </body>
 </html>
+
