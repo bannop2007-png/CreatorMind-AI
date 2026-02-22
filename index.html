@@ -6,37 +6,53 @@
     <title>CreatorMind AI</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-theme">
+
+<div class="animated-bg"></div>
 
 <header>
     <div class="logo">CreatorMind AI</div>
     <nav>
-        <a href="#generator">Генератор Идей</a>
-        <a href="#">О Нас</a>
-        <a href="#">Контакты</a>
+        <a href="#about">О Нас</a>
+        <a href="#generator">Генератор</a>
+        <a href="#contacts">Контакты</a>
     </nav>
+    <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
 </header>
 
-<section class="hero">
-    <h1>Добро Пожаловать в CreatorMind AI!</h1>
-    <p>Мощный ИИ-помощник для генерации крутых идей контента. Создавай посты, видео и сторис за секунды — для Telegram, TikTok, YouTube и не только. Присоединяйся и начни зарабатывать на креативе!</p>
-    <button class="cta-button" onclick="scrollToRegister()">Зарегистрироваться Бесплатно</button>
-</section>
-
-<section class="register-section" id="register">
-    <h2>Создай Аккаунт</h2>
-    <form id="register-form">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Твой email..." required>
+<main class="landing-page">
+    <section class="register-container">
+        <div class="register-form">
+            <h2>Регистрация</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Твой email..." required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" placeholder="Придумай пароль..." required>
+                </div>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <p class="login-link">Уже есть аккаунт? <a href="#" onclick="simulateLogin()">Вход</a></p>
         </div>
-        <div class="form-group">
-            <label for="password">Пароль</label>
-            <input type="password" id="password" placeholder="Придумай пароль..." required>
+        
+        <div class="site-info">
+            <h2>Добро Пожаловать в CreatorMind AI!</h2>
+            <p>CreatorMind AI — это элегантный ИИ-помощник для креаторов. Мы помогаем генерировать 20 убойных идей контента мгновенно для Telegram, TikTok, YouTube Shorts и других платформ.</p>
+            <ul>
+                <li>🚀 Мгновенная генерация идей для постов, рилсов, сторис</li>
+                <li>💡 Персонализированные советы по нишам: заработок, мотивация, похудение и многое другое</li>
+                <li>🔒 Безопасная регистрация и хранение данных</li>
+                <li>🌐 Доступ с любого устройства</li>
+                <li>🎨 Темы: тёмная (для ночных сов) или светлая (для дневных воинов)</li>
+                <li>📈 Монетизация: Продавай идеи или используй для своего канала</li>
+            </ul>
+            <p>Присоединяйся к тысячам креаторов в 2026 году и сделай свой контент вирусным!</p>
         </div>
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-</section>
+    </section>
+</main>
 
 <section class="generator" id="generator">
     <h2>Генерируй Идеи Контента</h2>
@@ -53,21 +69,31 @@
     <div id="results"></div>
 </section>
 
-<footer>
-    CreatorMind AI © 2026 • Сделано с ❤️ в Баку для креаторов по всему миру
+<footer id="contacts">
+    CreatorMind AI © 2026 • Сделано с ❤️ в Баку для креаторов по всему миру • <a href="#">Контакты: support@creatormind.ai</a>
 </footer>
 
 <script>
-    function scrollToRegister() {
-        document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+    function toggleTheme() {
+        document.body.classList.toggle('light-theme');
+        document.body.classList.toggle('dark-theme');
+        const btn = document.getElementById('theme-toggle');
+        btn.textContent = document.body.classList.contains('dark-theme') ? '🌙' : '☀️';
+    }
+
+    function simulateLogin() {
+        alert('Перенаправление на страницу входа... (в реале здесь будет redirect)');
+        // Здесь можно добавить window.location.href = '/login.html';
     }
 
     document.getElementById('register-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        alert(`Регистрация успешна! Email: ${email}`);
+        alert(`Регистрация успешна! Email: ${email}. Теперь перенаправляем на главную...`);
         this.reset();
+        // Симуляция перенаправления: скролл к генератору
+        document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
     });
 
     function generateMockIdeas(niche) {
