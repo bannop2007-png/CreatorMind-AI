@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="us">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,27 +13,30 @@
 <header>
     <div class="logo">CreatorMind AI</div>
     <nav>
-        <a href="index.html">Главная</a>
+        <a href="index.html">Регистрация</a>
         <a href="about.html">О Нас</a>
         <a href="contacts.html">Контакты</a>
     </nav>
     <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
 </header>
 
-<section class="generator">
-    <h2>Генерируй Идеи Контента</h2>
-    <div class="input-group">
-        <input type="text" id="niche" placeholder="Введи нишу (например: заработок в Telegram, мотивация, похудение...)">
-        <button id="generate-btn" onclick="generateIdeas()">Сгенерировать 20 Идей</button>
-    </div>
+<main class="generator-page">
+    <section class="generator">
+        <h2>Генерируй Идеи Контента</h2>
+        <p class="intro-text">Введи нишу и получи 20 свежих идей для постов, видео или сторис. Всё просто и быстро!</p>
+        <div class="input-group">
+            <input type="text" id="niche" placeholder="Введи нишу (например: заработок в Telegram, мотивация, похудение...)">
+            <button id="generate-btn" onclick="generateIdeas()">Сгенерировать</button>
+        </div>
 
-    <div id="loading">
-        <div class="spinner"></div>
-        <p>ИИ творит магию над твоей нишей...</p>
-    </div>
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>ИИ думает над твоей нишей...</p>
+        </div>
 
-    <div id="results"></div>
-</section>
+        <div id="results"></div>
+    </section>
+</main>
 
 <footer>
     CreatorMind AI © 2026 • Сделано с ❤️ в Баку для креаторов по всему миру • <a href="contacts.html">Контакты: support@creatormind.ai</a>
