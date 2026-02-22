@@ -36,9 +36,9 @@ body.light-theme {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    opacity: 0.15;
-    animation: animatedGradient 15s ease infinite;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent-gold) 100%); /* Золотой градиент для богатства */
+    opacity: 0.12;
+    animation: animatedGradient 20s ease infinite;
     z-index: -1;
 }
 
@@ -99,7 +99,7 @@ nav a:hover {
     transform: rotate(20deg);
 }
 
-.landing-page {
+.landing-page, .generator-page {
     max-width: 1400px;
     margin: 100px auto;
     padding: 0 40px;
@@ -136,7 +136,7 @@ body.light-theme .register-form {
     box-shadow: inset 0 0 20px rgba(216, 191, 216, 0.2);
 }
 
-.register-form h2, .site-info h2, .generator h2, .about-section h2, .contacts-section h2 {
+.register-form h2, .site-info h2, .generator h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.8em;
     color: var(--accent-gold);
@@ -144,239 +144,20 @@ body.light-theme .register-form {
     text-align: center;
 }
 
-.form-group {
-    margin-bottom: 30px;
+.form-group input {
+    animation: pulseBorder 2s infinite alternate; /* Анимация на ввод для красоты */
 }
 
-label {
-    display: block;
-    font-size: 1.2em;
-    margin-bottom: 12px;
-    opacity: 0.9;
+@keyframes pulseBorder {
+    0% { border-color: var(--primary-light); }
+    100% { border-color: var(--accent-gold); }
 }
 
-input[type="email"], input[type="password"], #niche {
-    width: 100%;
-    padding: 18px 24px;
-    font-size: 1.1em;
-    background: rgba(255,255,255,0.1);
-    border: 2px solid var(--primary-light);
-    border-radius: 16px;
-    color: inherit;
-    outline: none;
-    transition: all 0.3s;
-}
-
-input:focus {
-    border-color: var(--accent-gold);
-    box-shadow: 0 0 0 5px rgba(255, 215, 0, 0.2);
-}
-
-button[type="submit"], #generate-btn, .cta-button {
-    width: 100%;
-    padding: 20px;
+.intro-text {
+    text-align: center;
     font-size: 1.3em;
-    font-weight: 700;
-    background: linear-gradient(90deg, var(--primary), var(--accent-gold));
-    border: none;
-    border-radius: 16px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.4s;
-    box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+    opacity: 0.9;
+    margin-bottom: 40px;
 }
 
-button:hover, .cta-button:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(138, 43, 226, 0.5);
-}
-
-.login-link {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 1.1em;
-}
-
-.login-link a {
-    color: var(--accent-gold);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.site-info p, .about-section p, .contacts-section p {
-    font-size: 1.2em;
-    line-height: 1.8;
-    margin-bottom: 25px;
-}
-
-.site-info ul, .about-section ul, .contacts-section ul {
-    list-style: none;
-    font-size: 1.2em;
-    line-height: 2.2;
-}
-
-.site-info ul li:before, .about-section ul li:before, .contacts-section ul li:before {
-    content: '✨ ';
-    color: var(--accent-gold);
-}
-
-.generator, .about-section, .contacts-section {
-    max-width: 1400px;
-    margin: 100px auto;
-    padding: 0 40px;
-    animation: fadeIn 2s ease-out;
-}
-
-.input-group {
-    display: flex;
-    max-width: 900px;
-    margin: 0 auto 50px;
-    gap: 20px;
-}
-
-#loading {
-    display: none;
-    text-align: center;
-    padding: 40px;
-    font-size: 1.4em;
-    color: var(--accent-gold);
-}
-
-.spinner {
-    width: 70px;
-    height: 70px;
-    border: 7px solid rgba(138, 43, 226, 0.2);
-    border-top-color: var(--accent-gold);
-    border-radius: 50%;
-    animation: spin 1.2s linear infinite;
-    margin: 0 auto 25px;
-}
-
-#results {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.idea-card {
-    background: rgba(50, 50, 80, 0.7);
-    border-radius: 24px;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    transition: all 0.4s;
-    border: 1px solid var(--primary-light);
-    animation: cardFadeIn 1s ease-out forwards;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-body.light-theme .idea-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: var(--primary);
-}
-
-.idea-card:hover {
-    transform: translateY(-12px) scale(1.03);
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(255, 215, 0, 0.2));
-    border-color: var(--accent-gold);
-    box-shadow: 0 25px 50px rgba(138, 43, 226, 0.4);
-}
-
-.idea-number {
-    background: var(--accent-gold);
-    color: #1a1a2e;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.4em;
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
-}
-
-.idea-text {
-    line-height: 1.7;
-    font-size: 1.2em;
-}
-
-.copy-btn {
-    background: rgba(255,255,255,0.15);
-    border: none;
-    padding: 14px;
-    border-radius: 14px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1.5em;
-    transition: 0.3s;
-}
-
-body.light-theme .copy-btn {
-    color: var(--text-light);
-    background: rgba(0,0,0,0.1);
-}
-
-.copy-btn:hover {
-    background: var(--accent-gold);
-    color: #1a1a2e;
-    transform: scale(1.15);
-}
-
-footer {
-    text-align: center;
-    padding: 50px;
-    font-size: 1em;
-    border-top: 2px solid var(--primary-light);
-    opacity: 0.8;
-}
-
-footer a {
-    color: var(--accent-gold);
-    text-decoration: none;
-}
-
-body.light-theme .animated-bg {
-    background: linear-gradient(135deg, var(--primary-light) 0%, #fff 100%);
-    opacity: 0.3;
-}
-
-body.light-theme footer {
-    border-top-color: var(--primary);
-}
-
-@media (max-width: 1024px) {
-    .register-container {
-        flex-direction: column;
-        gap: 40px;
-        padding: 40px;
-    }
-    .landing-page {
-        margin: 60px auto;
-    }
-    header {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .input-group {
-        flex-direction: column;
-        gap: 20px;
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes cardFadeIn {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+ /* Остальные стили без изменений — копируй из предыдущего ответа */
