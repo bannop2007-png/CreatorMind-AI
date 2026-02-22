@@ -1,47 +1,57 @@
-<!DOCTYPE html>
-<html lang="us">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CreatorMind AI - Генератор Идей</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="dark-theme">
+.gradient-title {
+    background: linear-gradient(90deg, var(--primary), var(--accent-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 2s infinite alternate;
+    font-size: 3em;
+}
 
-<div class="animated-bg"></div>
+.intro-text {
+    text-align: center;
+    font-size: 1.4em;
+    opacity: 0.85;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-<header>
-    <div class="logo">CreatorMind AI</div>
-    <nav>
-        <a href="index.html">Регистрация</a>
-        <a href="about.html">О Нас</a>
-        <a href="contacts.html">Контакты</a>
-    </nav>
-    <button id="theme-toggle" onclick="toggleTheme()">🌙</button>
-</header>
+.input-group input {
+    animation: pulseBorder 3s infinite alternate;
+}
 
-<main class="generator-page">
-    <section class="generator">
-        <h2>Генерируй Идеи Контента</h2>
-        <p class="intro-text">Введи нишу и получи 20 свежих идей для постов, видео или сторис. Всё просто и быстро!</p>
-        <div class="input-group">
-            <input type="text" id="niche" placeholder="Введи нишу (например: заработок в Telegram, мотивация, похудение...)">
-            <button id="generate-btn" onclick="generateIdeas()">Сгенерировать</button>
-        </div>
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
 
-        <div id="loading">
-            <div class="spinner"></div>
-            <p>ИИ думает над твоей нишей...</p>
-        </div>
+.idea-card {
+    background: linear-gradient(135deg, rgba(50, 50, 80, 0.7), rgba(40, 40, 70, 0.5)); /* Красивый градиент */
+    border-radius: 24px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.4s ease-in-out;
+    border: 1px solid var(--primary-light);
+    animation: cardFadeIn 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+}
 
-        <div id="results"></div>
-    </section>
-</main>
+.idea-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(255, 215, 0, 0.3));
+    border-color: var(--accent-gold);
+    box-shadow: 0 25px 50px rgba(255, 215, 0, 0.3);
+}
 
-<footer>
-    CreatorMind AI © 2026 • Сделано с ❤️ в Баку для креаторов по всему миру • <a href="contacts.html">Контакты: support@creatormind.ai</a>
-</footer>
+body.light-theme .idea-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 250, 0.8));
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+@keyframes pulseBorder {
+    0% { border-color: var(--primary-light); }
+    100% { border-color: rgba(255, 215, 0, 0.5); }
+}
