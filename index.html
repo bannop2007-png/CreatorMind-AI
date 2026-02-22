@@ -1,63 +1,350 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CreatorMind AI</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+
+        :root {
+            --purple: #6e56cf;
+            --purple-light: #bb86fc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #0f0f1f);
+            color: #e0e0ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(30, 30, 47, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px 40px;
+            border-bottom: 3px solid var(--purple);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: var(--purple-light);
+            text-shadow: 0 0 20px rgba(110, 86, 207, 0.6);
+        }
+
+        main {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .generator {
+            background: rgba(40, 40, 70, 0.4);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(110, 86, 207, 0.2);
+        }
+
+        .generator h1 {
+            font-size: 3.2em;
             text-align: center;
-            padding: 50px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #bb86fc, #6e56cf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
+        .generator p {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
         input {
-            padding: 10px;
-            width: 300px;
-            border-radius: 5px;
-            border: none;
+            flex: 1;
+            padding: 18px 24px;
+            font-size: 1.1em;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(110, 86, 207, 0.3);
+            border-radius: 16px;
+            color: white;
+            outline: none;
         }
+
+        input:focus {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 0 4px rgba(110, 86, 207, 0.2);
+        }
+
         button {
-            padding: 10px 20px;
-            margin-left: 10px;
+            padding: 18px 42px;
+            font-size: 1.1em;
+            font-weight: 600;
+            background: linear-gradient(90deg, #6e56cf, #bb86fc);
             border: none;
-            border-radius: 5px;
-            background: #3b82f6;
+            border-radius: 16px;
             color: white;
             cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
         }
-        #result {
-            margin-top: 30px;
-            text-align: left;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+
+        button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(110, 86, 207, 0.4);
+        }
+
+        #loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            font-size: 1.3em;
+            color: var(--purple-light);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(110, 86, 207, 0.2);
+            border-top-color: var(--purple-light);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #results {
+            margin-top: 40px;
+        }
+
+        .idea-card {
+            background: rgba(50, 50, 80, 0.6);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(110, 86, 207, 0.15);
+        }
+
+        .idea-card:hover {
+            transform: translateY(-8px);
+            background: rgba(110, 86, 207, 0.25);
+            border-color: var(--purple-light);
+        }
+
+        .idea-number {
+            background: var(--purple);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .idea-text {
+            flex: 1;
+            line-height: 1.5;
+            font-size: 1.05em;
+        }
+
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 1.4em;
+            transition: 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #bb86fc;
+            transform: scale(1.1);
+        }
+
+        aside {
+            background: rgba(40, 40, 70, 0.4);
+            border-radius: 24px;
+            padding: 40px 30px;
+            height: fit-content;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        aside h3 {
+            color: var(--purple-light);
+            margin-bottom: 25px;
+            font-size: 1.5em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; }
+            .generator { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <h1>CreatorMind AI</h1>
-    <p>Generate 20 content ideas instantly.</p>
+<header>
+    <div class="logo">CreatorMind AI</div>
+</header>
 
-    <input type="text" id="niche" placeholder="Enter your niche...">
-    <button onclick="generateIdeas()">Generate Ideas</button>
+<main>
+    <div class="generator">
+        <h1>CreatorMind AI</h1>
+        <p>Мгновенно генерируем 20 убойных идей контента</p>
+        
+        <div class="input-group">
+            <input type="text" id="niche" placeholder="Введи нишу (например: заработок в Telegram, мотивация, похудение...)">
+            <button onclick="generateIdeas()">Сгенерировать</button>
+        </div>
 
-    <div id="result"></div>
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>ИИ думает над твоей нишей...</p>
+        </div>
 
-    <script>
-        function generateIdeas() {
-            const niche = document.getElementById("niche").value;
-            const resultDiv = document.getElementById("result");
+        <div id="results"></div>
+    </div>
 
-            if (!niche) {
-                resultDiv.innerHTML = "Please enter a niche.";
-                return;
-            }
+    <aside>
+        <h3>Как пользоваться</h3>
+        <ul style="line-height:2; font-size:1.1em;">
+            <li>→ Пиши нишу на русском или английском</li>
+            <li>→ Получай 20 готовых идей для постов, рилсов, сторис</li>
+            <li>→ Копируй и сразу публикуй</li>
+            <li>→ Идеально для Telegram, TikTok, YouTube Shorts</li>
+        </ul>
+        
+        <h3 style="margin-top:40px;">Примеры ниш</h3>
+        <p style="opacity:0.8; line-height:1.8;">
+            • Заработок онлайн<br>
+            • Личный бренд<br>
+            • Похудение без диет<br>
+            • AI-инструменты<br>
+            • Мотивация 2026
+        </p>
+    </aside>
+</main>
 
-            resultDiv.innerHTML = "Ideas will appear here...";
+<footer>
+    CreatorMind AI © 2026 • Сделано с ❤️ для тебя
+</footer>
+
+<script>
+    function generateMockIdeas(niche) {
+        const templates = [
+            `Взрывной рилс: «Как я заработал ${niche.toLowerCase()} за 30 дней»`,
+            `Пост-карусель: 7 главных ошибок в нише ${niche}`,
+            `Сторис-серия: День из жизни человека из ниши ${niche}`,
+            `Видео «До/После» в теме ${niche}`,
+            `Мотивационный пост: Почему 99% сдаются в ${niche}`,
+            `Чек-лист: 10 шагов к успеху в ${niche}`,
+            `Вопрос в сторис: «Кто хочет ${niche} в 2026 году?»`,
+            `Разбор кейса: Как парень/девушка из ${niche} вышел на 500к`,
+            `Мем + серьёзный совет про ${niche}`,
+            `Трендовый звук + твоя идея про ${niche}`,
+            `Подкаст-мини: Топ-5 инструментов для ${niche}`,
+            `Контент-план на неделю для ${niche}`,
+            `«Секрет», который никто не рассказывает про ${niche}`,
+            `Отзывы + твоя история успеха в ${niche}`,
+            `Прогноз 2026: Что будет с нишей ${niche}`,
+            `Сравнение: Старый способ vs Новый способ ${niche}`,
+            `Вопросник: 10 вопросов, которые изменят твоё ${niche}`,
+            `Живой эфир: Ответы на все вопросы по ${niche}`,
+            `Коллаборация-идея для твоей ниши`,
+            `«Последний шанс» пост про ${niche}`
+        ];
+        
+        return templates.map((text, i) => `${i+1}. ${text}`);
+    }
+
+    async function generateIdeas() {
+        const niche = document.getElementById("niche").value.trim();
+        if (!niche) {
+            alert("Введи нишу, брат!");
+            return;
         }
-    </script>
 
+        // Показываем лоадер
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("results").innerHTML = "";
+
+        // Имитация работы ИИ
+        setTimeout(() => {
+            const ideas = generateMockIdeas(niche);
+            
+            let html = `<h2 style="margin-bottom:25px; color:#bb86fc;">20 идей для «${niche}»</h2>`;
+            
+            ideas.forEach(idea => {
+                html += `
+                <div class="idea-card">
+                    <div class="idea-number">${idea.split('.')[0]}</div>
+                    <div class="idea-text">${idea.split('. ').slice(1).join('. ')}</div>
+                    <button class="copy-btn" onclick="copyIdea(this)">📋</button>
+                </div>`;
+            });
+
+            document.getElementById("results").innerHTML = html;
+            document.getElementById("loading").style.display = "none";
+        }, 1600);
+    }
+
+    function copyIdea(btn) {
+        const text = btn.parentElement.querySelector('.idea-text').textContent;
+        navigator.clipboard.writeText(text);
+        
+        const original = btn.textContent;
+        btn.textContent = "✓";
+        btn.style.background = "#22c55e";
+        
+        setTimeout(() => {
+            btn.textContent = original;
+            btn.style.background = "";
+        }, 1500);
+    }
+
+    // Enter работает
+    document.getElementById("niche").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") generateIdeas();
+    });
+</script>
 </body>
 </html>
